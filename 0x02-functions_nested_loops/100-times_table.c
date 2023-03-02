@@ -1,47 +1,60 @@
 #include "main.h"
-
 /**
- * print_times_table - prints the n times table, starting with 0
- * @n: number of the times table
+ * print_times_table - prints all minutes
+ * Return: void
+ * @t: times to print the table
  */
-void print_times_table(int n)
+void print_times_table(int t)
 {
-	int i, j, k;
+	int i, j;
 
-	if (n >= 0 && n <= 15)
+	if (t > 15 || t < 0)
+		return;
+	for (i = 0; i <= t; i++)
 	{
-		for (i = 0; i <= n; i++)
+		for (j = 0; j <= t; j++)
 		{
-			for (j = 0; j <= n; j++)
+			int n = j * i;
+
+			int n1 = (n / 100) % 10;
+
+			int n2 = (n / 10) % 10;
+
+			int n3 = n % 10;
+
+			if (n < 10)
 			{
-				k = j * i;
-				if (j == 0)
+				if (j != 0)
 				{
-					_putchar(k + '0');
-				} else if (k < 10 && j != 0)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar(k + '0');
-				} else if (k >= 10 && k < 100)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar(' ');
-					_putchar((k / 10) + '0');
-					_putchar((k % 10) + '0');
-				} else if (k >= 100)
-				{
-					_putchar(',');
-					_putchar(' ');
-					_putchar((k / 100) + '0');
-					_putchar(((k / 10) % 10) + '0');
-					_putchar((k % 10) + '0');
+					put_spaces(3);
 				}
+				_putchar(48 + n);
+			} else if (n < 100)
+			{
+				put_spaces(2);
+				_putchar(48 + n2);
+				_putchar(48 + n3);
+			} else if (n < 1000)
+			{
+				_putchar(' ');
+				_putchar(48 + n1);
+				_putchar(48 + n2);
+				_putchar(48 + n3);
 			}
-			_putchar('\n');
+			if (j != t)
+				_putchar(',');
 		}
+		_putchar('\n');
 	}
+}
+/**
+ * put_spaces - Prints n spaces
+ * @n: the amount of spaces
+ */
+void put_spaces(int n)
+{
+	int i;
+
+	for (i = 0; i < n; i++)
+		_putchar(' ');
 }
